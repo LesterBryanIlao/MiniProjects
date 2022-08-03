@@ -1,5 +1,5 @@
 from tkinter import *
-from engineering_notation import *
+from engineering_notation import EngNumber
 from functools import partial
 from tkinter import messagebox
 from PIL import ImageTk, Image
