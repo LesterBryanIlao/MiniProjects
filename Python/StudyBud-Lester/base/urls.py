@@ -19,5 +19,6 @@ urlpatterns = [
     path('update-user/', views.updateUser, name="update-user"),
     
     path('topcis/', views.topicsPage, name="topics"),
+    path('activity/', views.activityPage, name="activity"),
     
 ]
