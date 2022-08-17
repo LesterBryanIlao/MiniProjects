@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 # Create your views here.
 
@@ -187,3 +187,21 @@ def deleteMessage(request, pk):
     
     context={'obj': message}
     return render(request, 'base/delete.html', context)
+
+@login_required(login_url='login')
+def updateUser(request):
+    user = request.user
+    form = UserForm(instance=user)
+    context = {'form': form}
+    
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile', pk=user.id)
+        
+    return render(request, 'base/update-user.html', context)
+
+def topicsPage(request):
+    context={}
+    return render(request, 'base/topics.html', context)
